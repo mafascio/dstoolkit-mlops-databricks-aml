@@ -18,7 +18,7 @@
         "value": "eastus"
     },
     "environment": {
-        "value": "sandbox"
+        "value": "sandboxaml"
     },
 
     "containerNames": {
