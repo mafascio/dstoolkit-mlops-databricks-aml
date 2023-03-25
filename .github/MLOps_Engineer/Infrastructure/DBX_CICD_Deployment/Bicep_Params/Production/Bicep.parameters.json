@@ -37,10 +37,10 @@
         }
       },
       "resourceGroupName" :{
-        "value": "databricks-prod-rg"
+        "value": "databricks-prodaml-rg"
       },
       "workspaceName" : {
-        "value": "dbxwsprod"
+        "value": "dbxwsprodaml"
       },
       "pricingTier": {
         "value": "premium"
@@ -49,13 +49,13 @@
         "value": true
       },
       "loganalyticswsname": {
-        "value": "loganalyticsprod"
+        "value": "loganalyticsprodaml"
       },
       "appInsightswsname": {
-        "value": "appinsightsprod"
+        "value": "appinsightsprodaml"
       },
       "storageAccountName": {
-        "value": "adlsprod"
+        "value": "adlsprodaml"
       },
       "amlwsname": {
         "value": "amlprod"

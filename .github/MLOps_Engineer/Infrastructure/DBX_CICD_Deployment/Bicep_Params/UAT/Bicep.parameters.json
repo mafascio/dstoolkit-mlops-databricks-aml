@@ -37,10 +37,10 @@
         }
       },
       "resourceGroupName" :{
-        "value": "databricks-uat-rg"
+        "value": "databricks-uataml-rg"
       },
       "workspaceName" : {
-        "value": "dbxwsuat"
+        "value": "dbxwsuataml"
       },
       "pricingTier": {
         "value": "premium"
@@ -49,13 +49,13 @@
         "value": true
       },
       "loganalyticswsname": {
-        "value": "loganalyticsuat"
+        "value": "loganalyticsuataml"
       },
       "appInsightswsname": {
-        "value": "appinsightsuat"
+        "value": "appinsightsuataml"
       },
       "storageAccountName": {
-        "value": "adlsuat"
+        "value": "adlsuataml"
       },
       "amlwsname": {
         "value": "amluat"
