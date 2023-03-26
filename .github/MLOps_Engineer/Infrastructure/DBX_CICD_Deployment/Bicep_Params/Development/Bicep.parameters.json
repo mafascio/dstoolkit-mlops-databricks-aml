@@ -18,7 +18,7 @@
         "value": "eastus"
     },
     "environment": {
-        "value": "devaml"
+        "value": "devamlmc"
     },
 
     "containerNames": {
@@ -38,10 +38,10 @@
       }
     },
     "resourceGroupName" :{
-      "value": "databricks-devaml-rg"
+      "value": "databricks-devamlmc-rg"
     },
     "workspaceName" : {
-      "value": "dbxwsdevaml"
+      "value": "dbxwsdevamlmc"
     },
     "pricingTier": {
       "value": "premium"
@@ -50,19 +50,19 @@
       "value": true
     },
     "loganalyticswsname": {
-      "value": "loganalyticsdevaml"
+      "value": "loganalyticsdevamlmc"
     },
     "appInsightswsname": {
-      "value": "appinsightsdevaml"
+      "value": "appinsightsdevamlmc"
     },
     "storageAccountName": {
-      "value": "adlsdevaml"
+      "value": "adlsdevamlmc"
     },
     "amlwsname": {
       "value": "amldev"
     },
     "amlblobname": {
-      "value": "amlblobdev"
+      "value": "amlblobdevmc"
     }
 
   }
