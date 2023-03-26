@@ -18,7 +18,7 @@
         "value": "eastus"
     },
     "environment": {
-        "value": "sandboxamlmc"
+        "value": "sbamlmc"
     },
 
     "containerNames": {
@@ -38,10 +38,10 @@
       }
     },
     "resourceGroupName" :{
-      "value": "databricks-sandboxamlmc-rg"
+      "value": "databricks-sbamlmc-rg"
     },
     "workspaceName" : {
-      "value": "dbxwssandboxamlmc"
+      "value": "dbxwssbamlmc"
     },
     "pricingTier": {
       "value": "premium"
@@ -50,19 +50,19 @@
       "value": true
     },
     "loganalyticswsname": {
-      "value": "loganalyticssandboxamlmc"
+      "value": "loganalyticssbamlmc"
     },
     "appInsightswsname": {
-      "value": "appinsightssandboxamlmc"
+      "value": "appinsightssbamlmc"
     },
     "storageAccountName": {
-      "value": "adlssandboxamlmc"
+      "value": "adlssbamlmc"
     },
     "amlwsname": {
-      "value": "amlsandbox"
+      "value": "amlsbmc"
     },
     "amlblobname": {
-      "value": "amlblobsandboxmc"
+      "value": "amlblobsbmc"
     }
   }
 }
