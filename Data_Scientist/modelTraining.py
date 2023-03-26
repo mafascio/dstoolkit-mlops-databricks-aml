@@ -1,6 +1,5 @@
 # Databricks notebook source
 
-
 # Modules.
 
 from pyspark.sql import *
@@ -21,7 +20,9 @@ import yaml
 import pathlib
 import sys
 from argparse import ArgumentParser
+
 # COMMAND ----------
+
 import mlflow
 import mlflow.azureml
 import azureml.mlflow
@@ -47,6 +48,7 @@ display(namespace)
 
 
 # COMMAND ----------
+
 if namespace.env is not None:
     display(namespace.env)
     params = yaml.safe_load(pathlib.Path(namespace.env).read_text())
@@ -58,17 +60,23 @@ if namespace.env is not None:
 else:
     display("Set The Parameters Manually, As We Are Deploying From UI")
     mlflow.set_experiment("/Shared/dbxDevelopment") 
+    #mlflow.set_experiment("/Shared/InteractiveDevelopmentMC") 
 
 
 # COMMAND ----------
+
 rounded_unix_timestamp_udf = udf(rounded_unix_timestamp, IntegerType())
 raw_data = spark.read.format("delta").load("/databricks-datasets/nyctaxi-with-zipcodes/subsampled")
 taxi_data = rounded_taxi_data(raw_data)
 display(taxi_data)
 
 # COMMAND ----------
+
 pickup_features_table = "feature_store_taxi_example.trip_pickup_features"
 dropoff_features_table = "feature_store_taxi_example.trip_dropoff_features"
+#pickup_features_table = "feature_store_taxi_example_mc.trip_pickup_features_mc"
+#dropoff_features_table = "feature_store_taxi_example_mc.trip_dropoff_features_mc"
+
 
 pickup_feature_lookups = [
    FeatureLookup( 
@@ -88,6 +96,7 @@ dropoff_feature_lookups = [
 
 
 # COMMAND ----------
+
 mlflow.end_run()
 mlflow.start_run() 
 exclude_columns = ["rounded_pickup_datetime", "rounded_dropoff_datetime"]
@@ -104,6 +113,10 @@ training_df = training_set.load_df()
 
 display(training_df)
 
+
+# COMMAND ----------
+
+mlflow.active_run().info.run_id
 
 # COMMAND ----------
 
@@ -132,15 +145,26 @@ model = lgb.train(
 
 
 # COMMAND ----------
+
 fs.log_model(
   model,
-  artifact_path="model_packaged",
+  artifact_path="model_packaged", #_interactivedevmc",
   flavor=mlflow.lightgbm,
   training_set=training_set,
-  registered_model_name="taxi_example_fare_packaged"
+  registered_model_name="taxi_example_fare_packaged" #_interactivedevmc"
 )
 
 # COMMAND ----------
+
+#mlflow.active_run().info.run_id
+
+# COMMAND ----------
+
+#training_run_id=mlflow.active_run().info.run_id
+#print(training_run_id)
+
+# COMMAND ----------
+
 pyfunc_model = fareClassifier(model)
 
 # End the current MLflow run and start a new one to log the new pyfunc model
@@ -149,20 +173,34 @@ mlflow.end_run()
 with mlflow.start_run() as run:
   fs.log_model(
       pyfunc_model,
-      "pyfunc_packaged_model",
+      "pyfunc_packaged_model",#_interactivedevmc",
       flavor=mlflow.pyfunc,
       training_set=training_set,
-      registered_model_name="pyfunc_taxi_fare_packaged",
+      registered_model_name="pyfunc_taxi_fare_packaged",#_interactivedevmc",
   )
+
+# COMMAND ----------
+
+#run.info.run_id
+
+# COMMAND ----------
+
+#pyfunc_run_id=run.info.run_id
+#print(pyfunc_run_id)
+
+# COMMAND ----------
+
+
+#print(training_run_id)
 
 # COMMAND ----------
 
 # Set Up AML MLFlow 
 
-workspace_name = "amlsandbox-eco3"
-resource_group = "databricks-sandbox-rg"
-
-subscription_id = dbutils.secrets.get(scope="DBX_SP_Credentials",key="SUBSCRIPTION_ID")
+workspace_name = "amlsbmc-aikt"
+resource_group = "databricks-sbamlmc-rg"
+subscription_id='1117d7e2-2b7d-4d2c-853a-ecd465e451ec'
+#subscription_id = dbutils.secrets.get(scope="DBX_SP_Credentials",key="SUBSCRIPTION_ID")
 DBX_SP_Client_Secret = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_Client_Secret")
 DBX_SP_ClientID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_ClientID")
 DBX_SP_TenantID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_TenantID")
@@ -204,7 +242,8 @@ mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())
 print("MLflow tracking URI to point to your Azure ML Workspace setup complete.")
 
 mlflow.end_run()
-mlflow.set_experiment("/Shared/dbxDevelopment") 
+#mlflow.set_experiment("/Shared/dbxDevelopment") 
+mlflow.set_experiment("/Shared/InteractiveDevelopmentMC") 
 with mlflow.start_run():
     # Log mlflow attributes for mlflow UI
     mlflow.log_param("alpha", "test")
@@ -214,12 +253,18 @@ with mlflow.start_run():
 
 # COMMAND ----------
 
+#aml_run_id=run.info.run_id
+#print(aml_run_id)
+
+# COMMAND ----------
+
 #mlflow.sklearn.save_model(lr, "model.pkl")
 #from azureml.core import Model
 #model = Model.register(workspace=ws, 
-#    model_name='nyc-taxi-fare',
+#    model_name='nyc-taxi-fare-adb-interactivedevmc',
 #    model_path='model.pkl', # local path
-#    description='Model to predict taxi fares in NYC.')
+#    description='Model to predict taxi fares in NYC - Interactive Dev MC - ADB Sandbox - AMl Integration.')
 
 # COMMAND ----------
+
 

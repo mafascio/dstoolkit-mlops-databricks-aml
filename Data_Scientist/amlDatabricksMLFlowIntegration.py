@@ -1,5 +1,4 @@
 # Databricks notebook source
-# COMMAND ----------
 import mlflow
 import mlflow.azureml
 import azureml.mlflow
@@ -14,12 +13,17 @@ from azure.ai.ml.entities import Model
 from azure.ai.ml.constants import AssetTypes
 import datetime
 from azure.ai.ml.entities import ManagedOnlineEndpoint, ManagedOnlineDeployment
+
 # COMMAND ----------
 
-workspace_name = "amlsandbox-eco3"
-resource_group = "databricks-sandbox-rg"
+workspace_name = "amlsbmc-aikt"
+resource_group = "databricks-sbamlmc-rg"
 
-subscription_id = dbutils.secrets.get(scope="DBX_SP_Credentials",key="SUBSCRIPTION_ID")
+subscription_id = '1117d7e2-2b7d-4d2c-853a-ecd465e451ec'
+#dbutils.secrets.get(scope="DBX_SP_Credentials",key="SUBSCRIPTION_ID")
+
+# COMMAND ----------
+
 DBX_SP_Client_Secret = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_Client_Secret")
 DBX_SP_ClientID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_ClientID")
 DBX_SP_TenantID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_TenantID")
