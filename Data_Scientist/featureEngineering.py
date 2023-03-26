@@ -41,6 +41,7 @@ if namespace.env is not None:
 else:
     display("Set The Parameters Manually, As We Are Deploying From UI")
     mlflow.set_experiment("/Shared/dbxDevelopment") 
+    #mlflow.set_experiment("/Shared/InteractiveDevelopmentMC")
 
 
 
@@ -88,6 +89,7 @@ display(pickup_features)
 # COMMAND ----------
 
 spark.sql("CREATE DATABASE IF NOT EXISTS feature_store_taxi_example;")
+#spark.sql("CREATE DATABASE IF NOT EXISTS feature_store_taxi_example_mc;")
 
 # COMMAND ----------
 
@@ -97,6 +99,7 @@ spark.conf.set("spark.sql.shuffle.partitions", "5")
 
 fs.create_table(
     name="feature_store_taxi_example.trip_pickup_features",
+    #name="feature_store_taxi_example_mc.trip_pickup_features_mc",
     primary_keys=["zip", "ts"],
     df=pickup_features,
     partition_columns="yyyy_mm",
@@ -104,6 +107,7 @@ fs.create_table(
 )
 fs.create_table(
     name="feature_store_taxi_example.trip_dropoff_features",
+    #name="feature_store_taxi_example_mc.trip_dropoff_features_mc",
     primary_keys=["zip", "ts"],
     df=dropoff_features,
     partition_columns="yyyy_mm",
@@ -130,6 +134,7 @@ pickup_features_df = pickup_features_fn(
 # Write the pickup features DataFrame to the feature store table
 fs.write_table(
   name="feature_store_taxi_example.trip_pickup_features",
+  #name="feature_store_taxi_example_mc.trip_pickup_features_mc",
   df=pickup_features_df,
   mode="merge",
 )
@@ -145,6 +150,7 @@ dropoff_features_df = dropoff_features_fn(
 # Write the dropoff features DataFrame to the feature store table
 fs.write_table(
   name="feature_store_taxi_example.trip_dropoff_features",
+  #name="feature_store_taxi_example_mc.trip_dropoff_features_mc",
   df=dropoff_features_df,
   mode="merge",
 )
