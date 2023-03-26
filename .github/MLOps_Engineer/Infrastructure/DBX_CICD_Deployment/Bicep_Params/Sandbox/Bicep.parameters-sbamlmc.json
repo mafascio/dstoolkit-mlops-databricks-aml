@@ -18,7 +18,7 @@
         "value": "eastus"
     },
     "environment": {
-        "value": "adbamlsb"
+        "value": "sbamlmc"
     },
 
     "containerNames": {
@@ -38,10 +38,10 @@
       }
     },
     "resourceGroupName" :{
-      "value": "adbaml-sb-rg"
+      "value": "databricks-sbamlmc-rg"
     },
     "workspaceName" : {
-      "value": "dbxwssbml"
+      "value": "dbxwssbamlmc"
     },
     "pricingTier": {
       "value": "premium"
@@ -50,19 +50,19 @@
       "value": true
     },
     "loganalyticswsname": {
-      "value": "loganalyticssbml"
+      "value": "loganalyticssbamlmc"
     },
     "appInsightswsname": {
-      "value": "appinsightssbml"
+      "value": "appinsightssbamlmc"
     },
     "storageAccountName": {
-      "value": "adlssbml"
+      "value": "adlssbamlmc"
     },
     "amlwsname": {
-      "value": "amlwssb"
+      "value": "amlsbmc"
     },
     "amlblobname": {
-      "value": "amlblobsb"
+      "value": "amlblobsbmc"
     }
   }
 }

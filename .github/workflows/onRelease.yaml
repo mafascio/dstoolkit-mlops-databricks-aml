@@ -4,7 +4,7 @@ name: onRelease Databricks
 on: 
   pull_request:
     branches:
-      - main
+      - master
       - feature/**
       - release/**
     tags:
@@ -16,7 +16,7 @@ on:
 jobs:
   pr_CI_Development:
 
-    if:                         github.event_name == 'pull_request' && github.event.action == 'opened' && github.base_ref == 'main'
+    if:                         github.event_name == 'pull_request' && github.event.action == 'opened' && github.base_ref == 'master'
     name:                       Checks
     runs-on:                    ubuntu-latest
     steps:
@@ -24,7 +24,7 @@ jobs:
           echo "Insert Continuous Integration Tests"
 
   prApproved_CD_Development:
-    if:                         github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && contains(github.head_ref, 'feature') && github.base_ref == 'main'
+    if:                         github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true && contains(github.head_ref, 'feature') && github.base_ref == 'master'
     uses:                       ./.github/workflows/taskDatabricks.yaml
     with:
       ENVIRONMENT:              Development
@@ -47,7 +47,7 @@ jobs:
           echo "${{ github.base_ref }}"
 
   prApproved_CD_UAT:
-    if:                         github.event_name == 'pull_request' && github.event.action == 'closed' && github.head_ref == 'main' && contains(github.base_ref, 'release')
+    if:                         github.event_name == 'pull_request' && github.event.action == 'closed' && github.head_ref == 'master' && contains(github.base_ref, 'release')
     uses:                       ./.github/workflows/taskDatabricks.yaml
     with:
       ENVIRONMENT:              UAT
