@@ -5,7 +5,8 @@ ML_PIPELINE_FILES:
         PARAMETERS:
             ENV:  '--env'
             FILE: 'file:fuse://DBX_Workflows/CICD_Deployments/DBX_Workflow_Parameters.yaml'
-            EXPERIMENT_NAME: '/Shared/cicd_workflow/nyc_taxi_experiments/feauture_engineering'
+            #EXPERIMENT_NAME: '/Shared/cicd_workflow/nyc_taxi_experiments/feauture_engineering'
+            EXPERIMENT_NAME: '/Shared/e2e_mlops/dbx/e2e_mlops'
 
     MODEL_TRAINING:
         FILE_PATH: file://Data_Scientist/modelTraining.py
@@ -13,7 +14,8 @@ ML_PIPELINE_FILES:
         PARAMETERS:
             ENV:  '--env'
             FILE: 'file:fuse://DBX_Workflows/CICD_Deployments/DBX_Workflow_Parameters.yaml'
-            EXPERIMENT_NAME: '/Shared/cicd_workflow/nyc_taxi_experiments/model_training'
+            #EXPERIMENT_NAME: '/Shared/cicd_workflow/nyc_taxi_experiments/model_training'
+            EXPERIMENT_NAME: '/Shared/e2e_mlops/dbx/e2e_mlops'
 
     MODEL_INFERENCE:
         FILE_PATH: 'file://Data_Scientist/modelInference.py'
@@ -21,7 +23,8 @@ ML_PIPELINE_FILES:
         PARAMETERS:
             ENV:  '--env'
             FILE: 'file:fuse://DBX_Workflows/CICD_Deployments/DBX_Workflow_Parameters.yaml'
-            EXPERIMENT_NAME: '/Shared/cicd_workflow/nyc_taxi_experiments/model_inference'
+            #EXPERIMENT_NAME: '/Shared/cicd_workflow/nyc_taxi_experiments/model_inference'
+            EXPERIMENT_NAME: '/Shared/e2e_mlops/dbx/e2e_mlops'
 
 
 
