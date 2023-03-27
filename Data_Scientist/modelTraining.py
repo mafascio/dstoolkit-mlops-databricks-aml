@@ -1,5 +1,4 @@
 # Databricks notebook source
-
 # Modules.
 
 from pyspark.sql import *
@@ -195,61 +194,61 @@ with mlflow.start_run() as run:
 
 # COMMAND ----------
 
-# Set Up AML MLFlow 
-
-workspace_name = "amlsbmc-aikt"
-resource_group = "databricks-sbamlmc-rg"
-subscription_id='1117d7e2-2b7d-4d2c-853a-ecd465e451ec'
-#subscription_id = dbutils.secrets.get(scope="DBX_SP_Credentials",key="SUBSCRIPTION_ID")
-DBX_SP_Client_Secret = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_Client_Secret")
-DBX_SP_ClientID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_ClientID")
-DBX_SP_TenantID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_TenantID")
-
-print(f"Test: {DBX_SP_ClientID}")
-print(f"Test: {DBX_SP_Client_Secret}")
-print(DBX_SP_TenantID)
-
-os.environ["AZURE_CLIENT_ID"] = DBX_SP_ClientID
-os.environ["AZURE_CLIENT_SECRET"] = DBX_SP_Client_Secret
-os.environ["AZURE_TENANT_ID"] = DBX_SP_TenantID
+## Set Up AML MLFlow 
+#
+#workspace_name = "amlsbmc-aikt"
+#resource_group = "databricks-sbamlmc-rg"
+#subscription_id='1117d7e2-2b7d-4d2c-853a-ecd465e451ec'
+##subscription_id = dbutils.secrets.get(scope="DBX_SP_Credentials",key="SUBSCRIPTION_ID")
+#DBX_SP_Client_Secret = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_Client_Secret")
+#DBX_SP_ClientID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_ClientID")
+#DBX_SP_TenantID = dbutils.secrets.get(scope="DBX_SP_Credentials",key="DBX_SP_TenantID")
+#
+#print(f"Test: {DBX_SP_ClientID}")
+#print(f"Test: {DBX_SP_Client_Secret}")
+#print(DBX_SP_TenantID)
+#
+#os.environ["AZURE_CLIENT_ID"] = DBX_SP_ClientID
+#os.environ["AZURE_CLIENT_SECRET"] = DBX_SP_Client_Secret
+#os.environ["AZURE_TENANT_ID"] = DBX_SP_TenantID
 
 # COMMAND ----------
 
-# Use AzureML SDK To Authenticate. 
-
-from azureml.core.authentication import ServicePrincipalAuthentication
-
-svc_pr = ServicePrincipalAuthentication(
-                        tenant_id=DBX_SP_TenantID,
-                        service_principal_id= DBX_SP_ClientID,
-                        service_principal_password=DBX_SP_Client_Secret)
-
-ws = Workspace(
-        subscription_id=subscription_id,
-        resource_group=resource_group,
-        workspace_name=workspace_name,
-        auth=svc_pr
-        )
-
-print(ws)
-
-aml_uri = ws.get_mlflow_tracking_uri()
-print(aml_uri)
-
-
-import mlflow
-mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri()) 
-print("MLflow tracking URI to point to your Azure ML Workspace setup complete.")
-
-mlflow.end_run()
-#mlflow.set_experiment("/Shared/dbxDevelopment") 
-mlflow.set_experiment("/Shared/InteractiveDevelopmentMC") 
-with mlflow.start_run():
-    # Log mlflow attributes for mlflow UI
-    mlflow.log_param("alpha", "test")
-    mlflow.log_param("l1_ratio", "random")
-    mlflow.log_metric("rmse", 3)
-    mlflow.sklearn.log_model(pyfunc_model, "model")
+## Use AzureML SDK To Authenticate. 
+#
+#from azureml.core.authentication import ServicePrincipalAuthentication
+#
+#svc_pr = ServicePrincipalAuthentication(
+#                        tenant_id=DBX_SP_TenantID,
+#                        service_principal_id= DBX_SP_ClientID,
+#                        service_principal_password=DBX_SP_Client_Secret)
+#
+#ws = Workspace(
+#        subscription_id=subscription_id,
+#        resource_group=resource_group,
+#        workspace_name=workspace_name,
+#        auth=svc_pr
+#        )
+#
+#print(ws)
+#
+#aml_uri = ws.get_mlflow_tracking_uri()
+#print(aml_uri)
+#
+#
+#import mlflow
+#mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri()) 
+#print("MLflow tracking URI to point to your Azure ML Workspace setup complete.")
+#
+#mlflow.end_run()
+##mlflow.set_experiment("/Shared/dbxDevelopment") 
+#mlflow.set_experiment("/Shared/InteractiveDevelopmentMC") 
+#with mlflow.start_run():
+#    # Log mlflow attributes for mlflow UI
+#    mlflow.log_param("alpha", "test")
+#    mlflow.log_param("l1_ratio", "random")
+#    mlflow.log_metric("rmse", 3)
+#    mlflow.sklearn.log_model(pyfunc_model, "model")
 
 # COMMAND ----------
 
